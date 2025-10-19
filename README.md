@@ -1,36 +1,165 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Banner Maker
+
+A Next.js application for creating professional marketing banners with ease. Built with Next.js 15, TypeScript, Tailwind CSS, and shadcn/ui.
+
+## Features
+
+- 🎨 **Live Preview** - See your banner update in real-time as you edit
+- 📝 **Simple Text Editing** - Edit headline and description text with clean form inputs
+- 🖼️ **Background Selection** - Choose from 5 preset background images
+- 💾 **Export Options** - Download as PNG or WebP format
+- 📏 **Fixed Dimensions** - Exports at 1200×650px (perfect for social media banners)
+- 🎯 **No Design Skills Required** - Simple interface for marketing teams
+- ⚡ **Instant Generation** - Create banners in seconds, not minutes
+
+## Tech Stack
+
+- **Next.js 15** - React framework with App Router
+- **TypeScript** - Type-safe code
+- **Tailwind CSS** - Utility-first styling
+- **shadcn/ui** - Beautiful, accessible UI components
+- **HTML5 Canvas** - Banner rendering and export
+- **lucide-react** - Icon library
 
 ## Getting Started
 
-First, run the development server:
+### Prerequisites
 
+- Node.js 18+ 
+- npm or yarn
+
+### Installation
+
+1. Clone the repository or navigate to the project directory:
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+cd bannermaker
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+2. Install dependencies:
+```bash
+npm install
+```
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+3. Add your background images:
+   - Place 5 background images (1200×650px) in `public/backgrounds/`
+   - Name them: `bg1.jpg`, `bg2.jpg`, `bg3.jpg`, `bg4.jpg`, `bg5.jpg`
+   - Update names in `components/banner/BannerEditor.tsx` if needed
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+4. Run the development server:
+```bash
+npm run dev
+```
 
-## Learn More
+5. Open [http://localhost:3000](http://localhost:3000) in your browser
 
-To learn more about Next.js, take a look at the following resources:
+## Usage
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+1. **Enter Text**: Type your headline and description in the left panel
+2. **Choose Background**: Select a background from the dropdown menu
+3. **Preview**: See your banner update live on the right panel
+4. **Export**: Click "Export as PNG" or "Export as WebP" to download
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Project Structure
 
-## Deploy on Vercel
+```
+bannermaker/
+├── app/
+│   ├── page.tsx              # Main page
+│   ├── layout.tsx            # Root layout
+│   └── globals.css           # Global styles
+├── components/
+│   ├── ui/                   # shadcn/ui components
+│   │   ├── button.tsx
+│   │   ├── input.tsx
+│   │   ├── textarea.tsx
+│   │   ├── select.tsx
+│   │   ├── card.tsx
+│   │   └── label.tsx
+│   └── banner/               # Banner-specific components
+│       ├── BannerEditor.tsx  # Main editor component
+│       ├── BannerCanvas.tsx  # Canvas rendering logic
+│       ├── TextEditor.tsx    # Text input form
+│       └── BackgroundSelector.tsx
+├── public/
+│   └── backgrounds/          # Background images
+│       ├── bg1.jpg
+│       ├── bg2.jpg
+│       ├── bg3.jpg
+│       ├── bg4.jpg
+│       └── bg5.jpg
+└── lib/
+    └── utils.ts              # Utility functions
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Customization
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+### Changing Banner Dimensions
+
+Edit the constants in `components/banner/BannerCanvas.tsx`:
+```typescript
+const CANVAS_WIDTH = 1200
+const CANVAS_HEIGHT = 650
+```
+
+### Adjusting Text Positioning
+
+Modify the position constants in `components/banner/BannerCanvas.tsx`:
+```typescript
+const LOGO_POSITION = { x: 145, y: 170 }
+const HEADLINE_POSITION = { x: 145, y: 350 }
+const SUBTEXT_POSITION = { x: 145, y: 420 }
+```
+
+### Changing Typography
+
+Update font settings in `components/banner/BannerCanvas.tsx`:
+```typescript
+const HEADLINE_FONT = "bold 48px Inter, system-ui, -apple-system, sans-serif"
+const SUBTEXT_FONT = "400 24px Inter, system-ui, -apple-system, sans-serif"
+```
+
+### Adding More Backgrounds
+
+Edit the `DEFAULT_BACKGROUNDS` array in `components/banner/BannerEditor.tsx`:
+```typescript
+const DEFAULT_BACKGROUNDS: BackgroundOption[] = [
+  { id: '1', name: 'Tech Grid', path: '/backgrounds/bg1.jpg' },
+  // Add more backgrounds here
+]
+```
+
+## Building for Production
+
+```bash
+npm run build
+npm run start
+```
+
+## Deployment
+
+### Vercel (Recommended)
+
+1. Push your code to GitHub
+2. Import the project in [Vercel](https://vercel.com)
+3. Deploy with one click
+
+### Other Platforms
+
+This Next.js app can be deployed to:
+- Netlify
+- AWS Amplify
+- Railway
+- Render
+- Any platform supporting Next.js
+
+## License
+
+MIT
+
+## Support
+
+For issues or questions, please open an issue in the repository.
+
+---
+
+**Built with ❤️ for marketing teams everywhere**
