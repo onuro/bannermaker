@@ -19,10 +19,6 @@ export function TextEditor({
   onSubtextChange,
 }: TextEditorProps) {
   return (
-    <Card>
-      <CardHeader>
-        <CardTitle>Content</CardTitle>
-      </CardHeader>
       <CardContent className="space-y-4">
         <div className="space-y-2">
           <Label htmlFor="headline">Headline</Label>
@@ -47,6 +43,5 @@ export function TextEditor({
           />
         </div>
       </CardContent>
-    </Card>
   )
 }

@@ -9,6 +9,7 @@ interface BackgroundOption {
   id: string
   name: string
   path: string
+  type: 'image' | 'video'
 }
 
 interface BackgroundSelectorProps {
@@ -30,7 +31,7 @@ export function BackgroundSelector({
       <CardContent className="space-y-4">
         <div className="space-y-2">
           <Label>Choose Background</Label>
-          <div className="grid grid-cols-2 gap-3 p-1.5 overflow-y-auto scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-gray-100">
+          <div className="grid grid-cols-2 gap-3 p-1.5 pb-8 overflow-y-auto max-h-[758px] scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-gray-100">
             {backgrounds.map((bg) => {
               const isSelected = selectedBackground === bg.path
               return (
@@ -48,12 +49,23 @@ export function BackgroundSelector({
                   `}
                   aria-label={`Select ${bg.name}`}
                 >
-                  <Image
-                    src={bg.path}
-                    alt={bg.name}
-                    fill
-                    className="object-cover"
-                  />
+                  {bg.type === 'video' ? (
+                    <video
+                      src={bg.path}
+                      className="w-full h-full object-cover"
+                      muted
+                      loop
+                      playsInline
+                      preload="metadata"
+                    />
+                  ) : (
+                    <Image
+                      src={bg.path}
+                      alt={bg.name}
+                      fill
+                      className="object-cover"
+                    />
+                  )}
                   
                   {/* Selected indicator */}
                   {isSelected && (
