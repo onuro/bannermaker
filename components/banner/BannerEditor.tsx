@@ -22,6 +22,9 @@ const DEFAULT_BACKGROUNDS: BackgroundOption[] = [
   { id: '5', name: 'Flux Wallets BG', path: '/backgrounds/five.jpg' },
   { id: '6', name: 'Flux Kaspa BG', path: '/backgrounds/six.jpg' },
   { id: '7', name: 'Flux Arcane BG', path: '/backgrounds/seven.jpg' },
+  { id: '8', name: 'Flux Generic BG 1', path: '/backgrounds/eight.jpg' },
+  { id: '9', name: 'Flux WP BG', path: '/backgrounds/nine.jpg' },
+  { id: '10', name: 'Flux Generic BG 2', path: '/backgrounds/ten.jpg' }
 ]
 
 export function BannerEditor() {
