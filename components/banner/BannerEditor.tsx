@@ -18,6 +18,8 @@ const DEFAULT_BACKGROUNDS: BackgroundOption[] = [
   { id: '1', name: '4 blocks', path: '/backgrounds/one.jpg' },
   { id: '2', name: 'Node Elevated', path: '/backgrounds/two.jpg' },
   { id: '3', name: 'Flux Nodes BG', path: '/backgrounds/three.jpg' },
+  { id: '4', name: 'Flux AI BG', path: '/backgrounds/four.jpg' },
+  { id: '5', name: 'Flux Wallets BG', path: '/backgrounds/five.jpg' },
 ]
 
 export function BannerEditor() {
