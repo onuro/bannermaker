@@ -3,6 +3,7 @@
 import { Label } from '@/components/ui/label'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Check } from 'lucide-react'
+import Image from 'next/image'
 
 interface BackgroundOption {
   id: string
@@ -29,7 +30,7 @@ export function BackgroundSelector({
       <CardContent className="space-y-4">
         <div className="space-y-2">
           <Label>Choose Background</Label>
-          <div className="grid grid-cols-2 gap-3 p-3 overflow-y-auto pr-2 scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-gray-100">
+          <div className="grid grid-cols-2 gap-3 p-1.5 overflow-y-auto scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-gray-100">
             {backgrounds.map((bg) => {
               const isSelected = selectedBackground === bg.path
               return (
@@ -47,10 +48,11 @@ export function BackgroundSelector({
                   `}
                   aria-label={`Select ${bg.name}`}
                 >
-                  <img
+                  <Image
                     src={bg.path}
                     alt={bg.name}
-                    className="w-full h-full object-cover"
+                    fill
+                    className="object-cover"
                   />
                   
                   {/* Selected indicator */}
