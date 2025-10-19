@@ -64,7 +64,7 @@ export function BannerEditor() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 py-8 px-4">
-      <div className="max-w-7xl mx-auto space-y-8">
+      <div className="max-w-[1440px] mx-auto space-y-8">
         {/* Header */}
         <div className="text-center space-y-2">
           <h1 className="text-4xl font-bold text-gray-900">Banner Maker</h1>
@@ -85,12 +85,6 @@ export function BannerEditor() {
 
           {/* Right Column - Preview & Export */}
           <div className="lg:col-span-4 space-y-6">
-            <TextEditor
-              headline={headline}
-              subtext={subtext}
-              onHeadlineChange={setHeadline}
-              onSubtextChange={setSubtext}
-            />
             <Card>
               <CardHeader>
                 <CardTitle>Live Preview</CardTitle>
@@ -129,6 +123,12 @@ export function BannerEditor() {
                 </p>
               </CardContent>
             </Card>
+            <TextEditor
+              headline={headline}
+              subtext={subtext}
+              onHeadlineChange={setHeadline}
+              onSubtextChange={setSubtext}
+            />
           </div>
         </div>
       </div>

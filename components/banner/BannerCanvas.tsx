@@ -18,14 +18,15 @@ interface TextLayout {
   maxWidth: number
 }
 
-const CANVAS_WIDTH = 1200
-const CANVAS_HEIGHT = 650
-const LOGO_POSITION = { x: 90, y: 90 }
-const TEXT_MARGIN = { left: 90, right: 90, bottom: 64 }
-const LINE_HEIGHTS = { headline: 76, subtext: 38 } // 54px * 140% = 76px, 24px * 160% = 38px
+const SCALE_FACTOR = 2
+const CANVAS_WIDTH = 1200 * SCALE_FACTOR
+const CANVAS_HEIGHT = 650 * SCALE_FACTOR
+const LOGO_POSITION = { x: 90 * SCALE_FACTOR, y: 90 * SCALE_FACTOR }
+const TEXT_MARGIN = { left: 90 * SCALE_FACTOR, right: 90 * SCALE_FACTOR, bottom: 80 * SCALE_FACTOR }
+const LINE_HEIGHTS = { headline: 64 * SCALE_FACTOR, subtext: 38 * SCALE_FACTOR } // 54px * 140% = 76px, 24px * 160% = 38px
 const FONTS = {
-  headline: 'bold 54px Gilroy, system-ui, -apple-system, sans-serif',
-  subtext: '24px Figtree, system-ui, -apple-system, sans-serif'
+  headline: `bold ${56 * SCALE_FACTOR}px Gilroy, system-ui, -apple-system, sans-serif`,
+  subtext: `${24 * SCALE_FACTOR}px Figtree, system-ui, -apple-system, sans-serif`
 }
 
 export function BannerCanvas({ headline, subtext, background, logo }: BannerCanvasProps) {
@@ -92,7 +93,7 @@ export function BannerCanvas({ headline, subtext, background, logo }: BannerCanv
       fluxLogo.crossOrigin = 'anonymous'
       fluxLogo.onload = () => {
         // Calculate logo dimensions (maintaining aspect ratio)
-        const logoWidth = 200  // Reasonable size for the banner
+        const logoWidth = 200 * SCALE_FACTOR  // Reasonable size for the banner
         const logoHeight = (fluxLogo.height / fluxLogo.width) * logoWidth
         
         ctx.drawImage(fluxLogo, LOGO_POSITION.x, LOGO_POSITION.y, logoWidth, logoHeight)
@@ -147,7 +148,7 @@ export function BannerCanvas({ headline, subtext, background, logo }: BannerCanv
       const subtextHeight = subtextLines.length * LINE_HEIGHTS.subtext
       
       // Calculate total content height and positioning (matching Figma layout)
-      const headlineSubtextGap = subtextLines.length > 0 ? 32 : 0 // 32px gap between headline and description
+      const headlineSubtextGap = subtextLines.length > 0 ? 32 * SCALE_FACTOR : 0 // 32px gap between headline and description
       const totalContentHeight = headlineHeight + (subtextLines.length > 0 ? subtextHeight + headlineSubtextGap : 0)
       
       // Position text so bottom of content is exactly 120px from canvas bottom
@@ -155,7 +156,7 @@ export function BannerCanvas({ headline, subtext, background, logo }: BannerCanv
       const contentStartY = contentBottomY - totalContentHeight
       
       // Blur overlay should extend 60px above the text content
-      const overlayTopPadding = 60
+      const overlayTopPadding = 60 * SCALE_FACTOR
       const overlayHeight = totalContentHeight + overlayTopPadding + TEXT_MARGIN.bottom
       
       return {
@@ -220,9 +221,9 @@ export function BannerCanvas({ headline, subtext, background, logo }: BannerCanv
       const startY = CANVAS_HEIGHT - overlayHeight
       
       // Create progressive blur with multiple strips
-      const numStrips = 20  // More strips for smoother transition
+      const numStrips = 40 * SCALE_FACTOR  // More strips for smoother transition
       const stripHeight = overlayHeight / numStrips
-      const maxBlur = 20     // Maximum blur at the bottom
+      const maxBlur = 25 * SCALE_FACTOR     // Maximum blur at the bottom
       
       for (let i = 0; i < numStrips; i++) {
         const stripY = startY + (i * stripHeight)
@@ -307,7 +308,8 @@ export function BannerCanvas({ headline, subtext, background, logo }: BannerCanv
       ref={canvasRef}
       width={CANVAS_WIDTH}
       height={CANVAS_HEIGHT}
-      className="border border-gray-300 rounded-lg shadow-lg max-w-full h-auto aspect-[12/6.5]"
+      // style={{ width: '1200px', height: '650px' }}
+      className="border border-gray-300 rounded-lg shadow-lg max-w-full h-auto"
     />
   )
 }
