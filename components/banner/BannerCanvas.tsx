@@ -39,7 +39,7 @@ export function BannerCanvas({ headline, subtext, background, logo }: BannerCanv
         // Load Gilroy font
         const gilroy = new FontFace(
           'Gilroy',
-          'url(/fonts/Gilroy-Bold.woff2) format("woff2")',
+          'url(/fonts/Gilroy-bold.woff2) format("woff2")',
           { weight: '700', style: 'normal' }
         )
         
