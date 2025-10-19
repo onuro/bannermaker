@@ -73,12 +73,6 @@ export function BannerEditor() {
         <div className="grid lg:grid-cols-6 gap-8">
           {/* Left Column - Controls */}
           <div className="lg:col-span-2 space-y-6">
-            <TextEditor
-              headline={headline}
-              subtext={subtext}
-              onHeadlineChange={setHeadline}
-              onSubtextChange={setSubtext}
-            />
 
             <BackgroundSelector
               backgrounds={DEFAULT_BACKGROUNDS}
@@ -89,6 +83,12 @@ export function BannerEditor() {
 
           {/* Right Column - Preview & Export */}
           <div className="lg:col-span-4 space-y-6">
+            <TextEditor
+              headline={headline}
+              subtext={subtext}
+              onHeadlineChange={setHeadline}
+              onSubtextChange={setSubtext}
+            />
             <Card>
               <CardHeader>
                 <CardTitle>Live Preview</CardTitle>

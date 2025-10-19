@@ -1,14 +1,8 @@
 'use client'
 
 import { Label } from '@/components/ui/label'
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from '@/components/ui/select'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import { Check } from 'lucide-react'
 
 interface BackgroundOption {
   id: string
@@ -34,34 +28,47 @@ export function BackgroundSelector({
       </CardHeader>
       <CardContent className="space-y-4">
         <div className="space-y-2">
-          <Label htmlFor="background">Choose Background</Label>
-          <Select value={selectedBackground} onValueChange={onBackgroundChange}>
-            <SelectTrigger id="background">
-              <SelectValue placeholder="Select a background" />
-            </SelectTrigger>
-            <SelectContent>
-              {backgrounds.map((bg) => (
-                <SelectItem key={bg.id} value={bg.path}>
-                  {bg.name}
-                </SelectItem>
-              ))}
-            </SelectContent>
-          </Select>
-        </div>
-
-        {/* Background Preview */}
-        {selectedBackground && (
-          <div className="space-y-2">
-            <Label>Preview</Label>
-            <div className="relative w-full aspect-[1200/650] rounded-md overflow-hidden border border-gray-200">
-              <img
-                src={selectedBackground}
-                alt="Background preview"
-                className="w-full h-full object-cover"
-              />
-            </div>
+          <Label>Choose Background</Label>
+          <div className="grid grid-cols-2 gap-3 p-3 overflow-y-auto pr-2 scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-gray-100">
+            {backgrounds.map((bg) => {
+              const isSelected = selectedBackground === bg.path
+              return (
+                <button
+                  key={bg.id}
+                  onClick={() => onBackgroundChange(bg.path)}
+                  className={`
+                    relative w-full aspect-[1200/650] rounded-lg overflow-hidden
+                    border-2 transition-all duration-200 cursor-pointer
+                    hover:scale-[1.02] hover:shadow-lg
+                    ${isSelected
+                      ? 'border-primary ring-2 ring-primary ring-offset-2'
+                      : 'border-gray-200 hover:border-gray-300'
+                    }
+                  `}
+                  aria-label={`Select ${bg.name}`}
+                >
+                  <img
+                    src={bg.path}
+                    alt={bg.name}
+                    className="w-full h-full object-cover"
+                  />
+                  
+                  {/* Selected indicator */}
+                  {isSelected && (
+                    <div className="absolute top-2 right-2 bg-primary text-primary-foreground rounded-full p-1">
+                      <Check className="w-4 h-4" />
+                    </div>
+                  )}
+                  
+                  {/* Background name overlay */}
+                  <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-2">
+                    <p className="text-xs text-white font-medium">{bg.name}</p>
+                  </div>
+                </button>
+              )
+            })}
           </div>
-        )}
+        </div>
       </CardContent>
     </Card>
   )

@@ -21,7 +21,7 @@ export function TextEditor({
   return (
     <Card>
       <CardHeader>
-        <CardTitle>Text Content</CardTitle>
+        <CardTitle>Content</CardTitle>
       </CardHeader>
       <CardContent className="space-y-4">
         <div className="space-y-2">
