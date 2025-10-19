@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 
 interface BannerCanvasProps {
   headline: string
@@ -25,13 +25,43 @@ const TEXT_MARGIN = { left: 90, right: 90, bottom: 64 }
 const LINE_HEIGHTS = { headline: 76, subtext: 38 } // 54px * 140% = 76px, 24px * 160% = 38px
 const FONTS = {
   headline: 'bold 54px Gilroy, system-ui, -apple-system, sans-serif',
-  subtext: '400 24px Gilroy, system-ui, -apple-system, sans-serif'
+  subtext: '24px Figtree, system-ui, -apple-system, sans-serif'
 }
 
 export function BannerCanvas({ headline, subtext, background, logo }: BannerCanvasProps) {
   const canvasRef = useRef<HTMLCanvasElement>(null)
+  const [fontsLoaded, setFontsLoaded] = useState(false)
+
+  // Load fonts for canvas rendering
+  useEffect(() => {
+    const loadFonts = async () => {
+      try {
+        // Load Gilroy font
+        const gilroy = new FontFace(
+          'Gilroy',
+          'url(/fonts/Gilroy-Bold.woff2) format("woff2")',
+          { weight: '700', style: 'normal' }
+        )
+        
+        await gilroy.load()
+        document.fonts.add(gilroy)
+        
+        // Wait for Figtree to be available (loaded via Next.js)
+        await document.fonts.ready
+        
+        setFontsLoaded(true)
+      } catch (error) {
+        console.warn('Font loading failed, using fallback fonts:', error)
+        setFontsLoaded(true) // Continue anyway with fallback fonts
+      }
+    }
+    
+    loadFonts()
+  }, [])
 
   useEffect(() => {
+    if (!fontsLoaded) return // Wait for fonts to load
+    
     const canvas = canvasRef.current
     if (!canvas) return
 
@@ -270,7 +300,7 @@ export function BannerCanvas({ headline, subtext, background, logo }: BannerCanv
       }
     }
 
-  }, [headline, subtext, background, logo])
+  }, [headline, subtext, background, logo, fontsLoaded])
 
   return (
     <canvas
