@@ -1,6 +1,6 @@
 # Banner Maker
 
-A Next.js application for creating professional marketing banners with ease. Built with Next.js 15, TypeScript, Tailwind CSS, and shadcn/ui.
+Flux Marketing Banner Generator app isfor creating professional marketing banners with ease. Built with Next.js 15, TypeScript, Tailwind CSS, and shadcn/ui.
 
 ## Features
 
