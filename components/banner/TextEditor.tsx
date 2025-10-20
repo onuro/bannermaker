@@ -27,7 +27,7 @@ export function TextEditor({
             placeholder="Enter headline text..."
             value={headline}
             onChange={(e) => onHeadlineChange(e.target.value)}
-            className="font-semibold"
+            className="font-semibold p-5 bg-white focus:bg-white active:bg-white"
           />
         </div>
         
@@ -39,7 +39,7 @@ export function TextEditor({
             value={subtext}
             onChange={(e) => onSubtextChange(e.target.value)}
             rows={4}
-            className="resize-none"
+            className="resize-none p-5 py-4 bg-white focus:bg-white active:bg-white min-h-[80px]"
           />
         </div>
       </CardContent>

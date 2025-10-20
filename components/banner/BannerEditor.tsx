@@ -117,7 +117,7 @@ export function BannerEditor() {
     <SidebarProvider
     style={{
       // @ts-expect-error CSS custom properties not typed
-      "--sidebar-width": "25rem",
+      "--sidebar-width": "32rem",
       "--sidebar-width-mobile": "20rem",
     }}
     >
@@ -141,7 +141,7 @@ export function BannerEditor() {
           </SidebarHeader>
           
           <SidebarContent className="px-4 py-6">
-            <div className="space-y-3">
+            <div className="space-y-3 p-2">
               <h3 className="text-sm font-semibold">Backgrounds</h3>
               <div className="grid grid-cols-2 gap-3">
                 {DEFAULT_BACKGROUNDS.map((bg) => {
@@ -186,7 +186,7 @@ export function BannerEditor() {
                       )}
                       
                       <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-1.5">
-                        <p className="text-[10px] text-white font-medium leading-tight">{bg.name}</p>
+                        <p className="text-[12px] text-white font-medium leading-tight">{bg.name}</p>
                       </div>
                     </button>
                   )
@@ -199,18 +199,15 @@ export function BannerEditor() {
         {/* Main Content */}
         <main className="flex-1 bg-gradient-to-br from-gray-50 to-gray-100 dark:from-zinc-900 dark:to-zinc-800 p-8">
           <div className="max-w-[1000px] mx-auto space-y-6">
-            <Card>
-              <CardHeader>
-                <CardTitle>Live Preview</CardTitle>
-              </CardHeader>
+
               <TextEditor
                 headline={headline}
                 subtext={subtext}
                 onHeadlineChange={setHeadline}
                 onSubtextChange={setSubtext}
               />
-              <CardContent className="space-y-4">
-                <div className="bg-gray-100 p-4 rounded-lg overflow-x-auto">
+              
+<CardContent className="space-y-4">
                   {isVideoBackground ? (
                     <BannerComposer
                       headline={headline}
@@ -224,7 +221,6 @@ export function BannerEditor() {
                       background={selectedBackground}
                     />
                   )}
-                </div>
 
                 <div className="flex gap-3">
                   {isVideoBackground ? (
@@ -264,7 +260,6 @@ export function BannerEditor() {
                   Export size: 2400 × 1300px {isVideoBackground && '(~5 second video)'}
                 </p>
               </CardContent>
-            </Card>
           </div>
         </main>
       </div>
