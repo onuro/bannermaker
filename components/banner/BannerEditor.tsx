@@ -35,6 +35,7 @@ const DEFAULT_BACKGROUNDS: BackgroundOption[] = [
   { id: '15', name: 'Flux Generic BG 7', path: '/backgrounds/15.jpg', type: 'image' },
   { id: '16', name: 'Flux Generic BG 8', path: '/backgrounds/16.jpg', type: 'image' },
   { id: '17', name: 'Flux Generic BG 9', path: '/backgrounds/17.jpg', type: 'image' },
+  { id: '18', name: 'Flux Generic BG 10', path: '/backgrounds/18.jpg', type: 'image' },
   // { id: '14', name: 'Video BG 1—ALPHA', path: '/backgrounds/video1.mp4', type: 'video' }
 ]
 

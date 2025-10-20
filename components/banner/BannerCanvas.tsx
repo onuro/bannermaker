@@ -23,7 +23,7 @@ const CANVAS_WIDTH = 1200 * SCALE_FACTOR
 const CANVAS_HEIGHT = 650 * SCALE_FACTOR
 const LOGO_POSITION = { x: 90 * SCALE_FACTOR, y: 90 * SCALE_FACTOR }
 const TEXT_MARGIN = { left: 90 * SCALE_FACTOR, right: 90 * SCALE_FACTOR, bottom: 80 * SCALE_FACTOR }
-const LINE_HEIGHTS = { headline: 64 * SCALE_FACTOR, subtext: 38 * SCALE_FACTOR } // 54px * 140% = 76px, 24px * 160% = 38px
+const LINE_HEIGHTS = { headline: 72 * SCALE_FACTOR, subtext: 38 * SCALE_FACTOR } // 54px * 140% = 76px, 24px * 160% = 38px
 const FONTS = {
   headline: `bold ${56 * SCALE_FACTOR}px Gilroy, system-ui, -apple-system, sans-serif`,
   subtext: `${24 * SCALE_FACTOR}px Figtree, system-ui, -apple-system, sans-serif`
@@ -32,6 +32,7 @@ const FONTS = {
 export function BannerCanvas({ headline, subtext, background, logo }: BannerCanvasProps) {
   const canvasRef = useRef<HTMLCanvasElement>(null)
   const [fontsLoaded, setFontsLoaded] = useState(false)
+  const [isLoading, setIsLoading] = useState(true)
 
   // Load fonts for canvas rendering
   useEffect(() => {
@@ -72,10 +73,14 @@ export function BannerCanvas({ headline, subtext, background, logo }: BannerCanv
     // Clear canvas
     ctx.clearRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT)
 
+    // Set loading state
+    setIsLoading(true)
+
     // Load and draw background
     const bgImage = new Image()
     bgImage.crossOrigin = 'anonymous'
     bgImage.onload = () => {
+      setIsLoading(false)
       // Draw clean background first
       ctx.drawImage(bgImage, 0, 0, CANVAS_WIDTH, CANVAS_HEIGHT)
 
@@ -117,6 +122,7 @@ export function BannerCanvas({ headline, subtext, background, logo }: BannerCanv
     }
 
     bgImage.onerror = () => {
+      setIsLoading(false)
       console.error('Failed to load background')
       // Draw a fallback background
       ctx.fillStyle = '#1a1a2e'
@@ -305,13 +311,26 @@ export function BannerCanvas({ headline, subtext, background, logo }: BannerCanv
   }, [headline, subtext, background, logo, fontsLoaded])
 
   return (
-    <canvas
-      ref={canvasRef}
-      width={CANVAS_WIDTH}
-      height={CANVAS_HEIGHT}
-      // style={{ width: '1200px', height: '650px' }}
-      className="border border-gray-300 rounded-lg shadow-lg max-w-full h-auto"
-    />
+    <div className="relative">
+      {isLoading && (
+        <div
+          className="absolute inset-0 flex items-center justify-center bg-gray-100 rounded-lg border border-gray-300"
+          style={{ aspectRatio: '1200/650' }}
+        >
+          <div className="flex flex-col items-center gap-3">
+            <div className="w-12 h-12 border-4 border-gray-300 border-t-blue-600 rounded-full animate-spin"></div>
+            <p className="text-sm text-gray-600">Loading background...</p>
+          </div>
+        </div>
+      )}
+      <canvas
+        ref={canvasRef}
+        width={CANVAS_WIDTH}
+        height={CANVAS_HEIGHT}
+        // style={{ width: '1200px', height: '650px' }}
+        className={`border border-gray-300 rounded-lg shadow-lg max-w-full h-auto transition-opacity duration-300 ${isLoading ? 'opacity-0' : 'opacity-100'}`}
+      />
+    </div>
   )
 }
 
