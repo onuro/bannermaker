@@ -118,6 +118,7 @@ export function BannerEditor() {
     style={{
       // @ts-expect-error CSS custom properties not typed
       "--sidebar-width": "32rem",
+      "--sidebar": "white",
       "--sidebar-width-mobile": "20rem",
     }}
     >
