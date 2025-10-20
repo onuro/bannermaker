@@ -143,7 +143,7 @@ export function BannerEditor() {
           <SidebarContent className="px-4 py-6">
             <div className="space-y-3 p-2">
               <h3 className="text-sm font-semibold">Backgrounds</h3>
-              <div className="grid grid-cols-2 gap-3">
+              <div className="grid grid-cols-2 gap-3"> 
                 {DEFAULT_BACKGROUNDS.map((bg) => {
                   const isSelected = selectedBackground === bg.path
                   return (
