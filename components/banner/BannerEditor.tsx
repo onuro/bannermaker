@@ -4,11 +4,13 @@ import { useState, useRef } from 'react'
 import { BannerCanvas, getCanvasBlob } from './BannerCanvas'
 import { BannerComposer } from './BannerComposer'
 import { TextEditor } from './TextEditor'
-import { BackgroundSelector } from './BackgroundSelector'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Download, Film } from 'lucide-react'
 import { recordBannerVideo, downloadBlob } from '@/lib/videoRecorder'
+import { SidebarProvider, Sidebar, SidebarContent, SidebarHeader } from '@/components/ui/sidebar'
+import { Check } from 'lucide-react'
+import Image from 'next/image'
 
 interface BackgroundOption {
   id: string
@@ -112,51 +114,101 @@ export function BannerEditor() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 dark:from-zinc-900 dark:to-zinc-800 py-8 px-4">
-      <div className="max-w-[1440px] mx-auto space-y-8">
-        {/* Header */}
-        <div className="flex items-start justify-between">
-          <div className="flex items-start gap-6">
-            <svg width="40" className='w-12 h-12 translate-y-1' height="40" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M40.2683 0.000220899C48.1679 0.0532051 55.8749 2.44412 62.4175 6.87146C68.9601 11.2988 74.0452 17.5643 77.0316 24.8779C80.018 32.1914 80.772 40.2255 79.1984 47.967C77.6248 55.7085 73.7942 62.8107 68.1896 68.378C62.5849 73.9452 55.4573 77.7283 47.7055 79.2501C39.9536 80.7719 31.9248 79.9643 24.6313 76.929C17.3379 73.8938 11.1065 68.7669 6.72303 62.1949C2.33952 55.6229 0.000177686 47.9 0 40.0002C0.035862 29.3561 4.29848 19.1621 11.8502 11.6607C19.4019 4.15931 29.6241 -0.0350692 40.2683 0.000220899Z" fill="#2656D7"/>
-              <path d="M45.04 63.2257L40.4532 65.8746L30.5997 60.1938L35.0745 57.61L35.1865 57.5448L45.04 63.2257Z" fill="white"/>
-              <path d="M62.6476 27.4374V32.7692L50.3171 25.6506L32.7277 35.8088V38.9527L25.3539 34.6966L18.2614 38.7886V27.4374L40.4532 14.625L62.6476 27.4374Z" fill="white"/>
-              <path d="M62.6476 38.8355V53.083L50.3197 60.1938H50.3041L37.9892 53.083V38.8355L50.3197 31.7143L62.6476 38.8355Z" fill="white"/>
-              <path d="M32.4438 44.8575V53.0439L25.3513 57.1411L18.2614 53.0466V44.8601L25.3539 40.7655L32.4438 44.8575Z" fill="white"/>
-            </svg>
-
-            <div className="space-y-2">
-              <h1 className="text-4xl font-bold text-gray-900 dark:text-white">Banner Maker</h1>
-              <p className="text-gray-600 dark:text-gray-400">Flux Marketing image generator</p>
+    <SidebarProvider
+    style={{
+      // @ts-expect-error CSS custom properties not typed
+      "--sidebar-width": "25rem",
+      "--sidebar-width-mobile": "20rem",
+    }}
+    >
+      <div className="flex min-h-screen w-full">
+        {/* Sidebar */}
+        <Sidebar>
+          <SidebarHeader className="border-b p-6">
+            <div className="flex items-center gap-4">
+              <svg width="32" height="32" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M40.2683 0.000220899C48.1679 0.0532051 55.8749 2.44412 62.4175 6.87146C68.9601 11.2988 74.0452 17.5643 77.0316 24.8779C80.018 32.1914 80.772 40.2255 79.1984 47.967C77.6248 55.7085 73.7942 62.8107 68.1896 68.378C62.5849 73.9452 55.4573 77.7283 47.7055 79.2501C39.9536 80.7719 31.9248 79.9643 24.6313 76.929C17.3379 73.8938 11.1065 68.7669 6.72303 62.1949C2.33952 55.6229 0.000177686 47.9 0 40.0002C0.035862 29.3561 4.29848 19.1621 11.8502 11.6607C19.4019 4.15931 29.6241 -0.0350692 40.2683 0.000220899Z" fill="#2656D7"/>
+                <path d="M45.04 63.2257L40.4532 65.8746L30.5997 60.1938L35.0745 57.61L35.1865 57.5448L45.04 63.2257Z" fill="white"/>
+                <path d="M62.6476 27.4374V32.7692L50.3171 25.6506L32.7277 35.8088V38.9527L25.3539 34.6966L18.2614 38.7886V27.4374L40.4532 14.625L62.6476 27.4374Z" fill="white"/>
+                <path d="M62.6476 38.8355V53.083L50.3197 60.1938H50.3041L37.9892 53.083V38.8355L50.3197 31.7143L62.6476 38.8355Z" fill="white"/>
+                <path d="M32.4438 44.8575V53.0439L25.3513 57.1411L18.2614 53.0466V44.8601L25.3539 40.7655L32.4438 44.8575Z" fill="white"/>
+              </svg>
+              <div>
+                <h2 className="text-lg font-bold">Banner Maker</h2>
+                <p className="text-xs text-muted-foreground">Flux Marketing</p>
+              </div>
             </div>
-          </div>
-
-        </div>
+          </SidebarHeader>
+          
+          <SidebarContent className="px-4 py-6">
+            <div className="space-y-3">
+              <h3 className="text-sm font-semibold">Backgrounds</h3>
+              <div className="grid grid-cols-2 gap-3">
+                {DEFAULT_BACKGROUNDS.map((bg) => {
+                  const isSelected = selectedBackground === bg.path
+                  return (
+                    <button
+                      key={bg.id}
+                      onClick={() => setSelectedBackground(bg.path)}
+                      className={`
+                        relative w-full aspect-[1200/650] rounded-lg overflow-hidden
+                        border-2 transition-all duration-200 cursor-pointer
+                        hover:scale-[1.02] hover:shadow-lg
+                        ${isSelected
+                          ? 'border-primary ring-2 ring-primary ring-offset-2'
+                          : 'border-gray-200 dark:border-gray-700 hover:border-gray-300 dark:hover:border-gray-600'
+                        }
+                      `}
+                      aria-label={`Select ${bg.name}`}
+                    >
+                      {bg.type === 'video' ? (
+                        <video
+                          src={bg.path}
+                          className="w-full h-full object-cover"
+                          muted
+                          loop
+                          playsInline
+                          preload="metadata"
+                        />
+                      ) : (
+                        <Image
+                          src={bg.path}
+                          alt={bg.name}
+                          fill
+                          className="object-cover"
+                        />
+                      )}
+                      
+                      {isSelected && (
+                        <div className="absolute top-1 right-1 bg-primary text-primary-foreground rounded-full p-1">
+                          <Check className="w-3 h-3" />
+                        </div>
+                      )}
+                      
+                      <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-1.5">
+                        <p className="text-[10px] text-white font-medium leading-tight">{bg.name}</p>
+                      </div>
+                    </button>
+                  )
+                })}
+              </div>
+            </div>
+          </SidebarContent>
+        </Sidebar>
 
         {/* Main Content */}
-        <div className="grid lg:grid-cols-6 gap-8">
-          {/* Left Column - Controls */}
-          <div className="lg:col-span-2 space-y-6">
-
-            <BackgroundSelector
-              backgrounds={DEFAULT_BACKGROUNDS}
-              selectedBackground={selectedBackground}
-              onBackgroundChange={setSelectedBackground}
-            />
-          </div>
-
-          {/* Right Column - Preview & Export */}
-          <div className="lg:col-span-4 space-y-6">
+        <main className="flex-1 bg-gradient-to-br from-gray-50 to-gray-100 dark:from-zinc-900 dark:to-zinc-800 p-8">
+          <div className="max-w-[1000px] mx-auto space-y-6">
             <Card>
               <CardHeader>
                 <CardTitle>Live Preview</CardTitle>
               </CardHeader>
               <TextEditor
-              headline={headline}
-              subtext={subtext}
-              onHeadlineChange={setHeadline}
-              onSubtextChange={setSubtext}
-            />
+                headline={headline}
+                subtext={subtext}
+                onHeadlineChange={setHeadline}
+                onSubtextChange={setSubtext}
+              />
               <CardContent className="space-y-4">
                 <div className="bg-gray-100 p-4 rounded-lg overflow-x-auto">
                   {isVideoBackground ? (
@@ -214,8 +266,8 @@ export function BannerEditor() {
               </CardContent>
             </Card>
           </div>
-        </div>
+        </main>
       </div>
-    </div>
+    </SidebarProvider>
   )
 }
