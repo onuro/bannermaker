@@ -38,6 +38,8 @@ const DEFAULT_BACKGROUNDS: BackgroundOption[] = [
   { id: '16', name: 'Flux Generic BG 8', path: '/backgrounds/16.jpg', type: 'image' },
   { id: '17', name: 'Flux Generic BG 9', path: '/backgrounds/17.jpg', type: 'image' },
   { id: '18', name: 'Flux Generic BG 10', path: '/backgrounds/18.jpg', type: 'image' },
+  { id: '19', name: 'Flux Generic BG 11', path: '/backgrounds/19.jpg', type: 'image' },
+  { id: '20', name: 'Flux Generic BG 12', path: '/backgrounds/20.jpg', type: 'image' },
   // { id: '14', name: 'Video BG 1—ALPHA', path: '/backgrounds/video1.mp4', type: 'video' }
 ]
 
@@ -198,8 +200,8 @@ export function BannerEditor() {
         </Sidebar>
 
         {/* Main Content */}
-        <main className="flex-1 bg-gradient-to-br from-gray-50 to-gray-100 dark:from-zinc-900 dark:to-zinc-800 p-8">
-          <div className="max-w-[1000px] mx-auto space-y-6">
+        <main className="flex-1 bg-gradient-to-br from-gray-100 to-gray-200 dark:from-zinc-900 dark:to-zinc-800 p-8">
+          <div className="max-w-[1200px] mx-auto space-y-6">
 
               <TextEditor
                 headline={headline}
