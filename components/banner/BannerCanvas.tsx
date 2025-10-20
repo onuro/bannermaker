@@ -88,14 +88,19 @@ export function BannerCanvas({ headline, subtext, background, logo }: BannerCanv
       const textLayout = calculateTextLayout(ctx, headline, subtext)
       
       // Only apply blur and overlay if there's text content
-      const hasTextContent = headline.trim() || subtext.trim()
-      if (hasTextContent) {
-        // Apply background blur to the overlay area
-        applyBackgroundBlur(ctx, bgImage, textLayout.overlayHeight)
+      // const hasTextContent = headline.trim() || subtext.trim()
+      // if (hasTextContent) {
+      //   // Apply background blur to the overlay area
+      //   applyBackgroundBlur(ctx, bgImage, textLayout.overlayHeight)
         
-        // Apply progressive overlay for text contrast
-        applyProgressiveOverlay(ctx, textLayout.overlayHeight)
-      }
+      //   // Apply progressive overlay for text contrast
+      //   applyProgressiveOverlay(ctx, textLayout.overlayHeight)
+      // }
+      // Apply background blur to the overlay area
+      applyBackgroundBlur(ctx, bgImage, textLayout.overlayHeight)
+      
+      // Apply progressive overlay for text contrast
+      applyProgressiveOverlay(ctx, textLayout.overlayHeight)
 
       // Always draw the Flux logo
       const fluxLogo = new Image()
