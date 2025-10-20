@@ -31,7 +31,7 @@ export function BackgroundSelector({
       <CardContent className="space-y-4">
         <div className="space-y-2">
           <Label>Choose Background</Label>
-          <div className="grid grid-cols-2 gap-3 p-1.5 pb-8 overflow-y-auto max-h-[758px] scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-gray-100">
+          <div className="grid grid-cols-2 gap-3 p-1.5 pb-8 pt-4 -mx-1.5 overflow-y-auto max-h-[758px] scrollbar-thin scrollbar-thumb-gray-300 dark:scrollbar-thumb-gray-600 scrollbar-track-gray-100 dark:scrollbar-track-gray-800">
             {backgrounds.map((bg) => {
               const isSelected = selectedBackground === bg.path
               return (
@@ -43,8 +43,8 @@ export function BackgroundSelector({
                     border-2 transition-all duration-200 cursor-pointer
                     hover:scale-[1.02] hover:shadow-lg
                     ${isSelected
-                      ? 'border-primary ring-2 ring-primary ring-offset-2'
-                      : 'border-gray-200 hover:border-gray-300'
+                      ? 'border-primary ring-2 ring-primary ring-offset-2 dark:ring-offset-gray-800'
+                      : 'border-gray-200 dark:border-gray-700 hover:border-gray-300 dark:hover:border-gray-600'
                     }
                   `}
                   aria-label={`Select ${bg.name}`}

@@ -164,7 +164,7 @@ export function BannerCanvas({ headline, subtext, background, logo }: BannerCanv
         subtextLines,
         headlineY: contentStartY,
         subtextY: contentStartY + headlineHeight + headlineSubtextGap,
-        overlayHeight: Math.min(overlayHeight, CANVAS_HEIGHT * 0.5), // Max 50% of canvas height
+        overlayHeight: Math.min(overlayHeight, CANVAS_HEIGHT * 0.6), // Max 65% of canvas height
         maxWidth
       }
     }
@@ -207,10 +207,10 @@ export function BannerCanvas({ headline, subtext, background, logo }: BannerCanv
       const gradient = ctx.createLinearGradient(0, startY, 0, CANVAS_HEIGHT)
       gradient.addColorStop(0, 'rgba(0, 0, 0, 0)')      // Completely transparent at top
       gradient.addColorStop(0.1, 'rgba(0, 0, 0, 0.05)')  // Very subtle start
-      gradient.addColorStop(0.3, 'rgba(0, 0, 0, 0.15)')  // Light overlay
-      gradient.addColorStop(0.6, 'rgba(0, 0, 0, 0.35)')  // Medium overlay
-      gradient.addColorStop(0.8, 'rgba(0, 0, 0, 0.55)')  // Strong overlay
-      gradient.addColorStop(1, 'rgba(0, 0, 0, 0.7)')     // Maximum overlay at bottom
+      gradient.addColorStop(0.3, 'rgba(0, 0, 0, 0.1)')  // Light overlay
+      gradient.addColorStop(0.6, 'rgba(0, 0, 0, 0.25)')  // Medium overlay
+      gradient.addColorStop(0.8, 'rgba(0, 0, 0, 0.35)')  // Strong overlay
+      gradient.addColorStop(1, 'rgba(0, 0, 0, 0.5)')     // Maximum overlay at bottom
       
       // Apply the progressive overlay
       ctx.fillStyle = gradient
@@ -223,12 +223,13 @@ export function BannerCanvas({ headline, subtext, background, logo }: BannerCanv
       // Create progressive blur with multiple strips
       const numStrips = 40 * SCALE_FACTOR  // More strips for smoother transition
       const stripHeight = overlayHeight / numStrips
+      const minBlur = 0 * SCALE_FACTOR      // Minimum blur at the top
       const maxBlur = 25 * SCALE_FACTOR     // Maximum blur at the bottom
       
       for (let i = 0; i < numStrips; i++) {
         const stripY = startY + (i * stripHeight)
         const blurProgress = i / (numStrips - 1) // 0 to 1
-        const blurAmount = blurProgress * maxBlur // 0px to 8px
+        const blurAmount = minBlur + (blurProgress * (maxBlur - minBlur)) // minBlur to maxBlur
         
         // Save canvas state
         ctx.save()

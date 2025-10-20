@@ -1,6 +1,7 @@
 'use client'
 
 import { useEffect, useRef } from 'react'
+import Image from 'next/image'
 
 interface BannerComposerProps {
   headline: string
@@ -70,7 +71,7 @@ export function BannerComposer({ headline, subtext, backgroundVideo }: BannerCom
       />
 
       {/* Flux Logo */}
-      <img
+      <Image
         src="/flux-logo.svg"
         alt="Flux Logo"
         style={{
