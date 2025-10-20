@@ -5,7 +5,6 @@ import { BannerCanvas, getCanvasBlob } from './BannerCanvas'
 import { BannerComposer } from './BannerComposer'
 import { TextEditor } from './TextEditor'
 import { BackgroundSelector } from './BackgroundSelector'
-import { ThemeToggle } from '@/components/ThemeToggle'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Download, Film } from 'lucide-react'
@@ -130,7 +129,6 @@ export function BannerEditor() {
             </div>
           </div>
 
-          <ThemeToggle />
         </div>
 
         {/* Main Content */}
