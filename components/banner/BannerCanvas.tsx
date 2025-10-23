@@ -89,7 +89,7 @@ export function BannerCanvas({ headline, subtext, background, logo }: BannerCanv
       
       // Only apply blur and overlay if there's text content
       const hasTextContent = headline.trim() || subtext.trim()
-      if (hasTextContent) {
+      if ( hasTextContent ) {
         // Apply background blur to the overlay area
         applyBackgroundBlur(ctx, bgImage, textLayout.overlayHeight)
         

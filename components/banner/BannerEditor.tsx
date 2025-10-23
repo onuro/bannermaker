@@ -5,7 +5,8 @@ import { BannerCanvas, getCanvasBlob } from './BannerCanvas'
 import { BannerComposer } from './BannerComposer'
 import { TextEditor } from './TextEditor'
 import { Button } from '@/components/ui/button'
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+// import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import { CardContent } from '@/components/ui/card'
 import { Download, Film } from 'lucide-react'
 import { recordBannerVideo, downloadBlob } from '@/lib/videoRecorder'
 import { SidebarProvider, Sidebar, SidebarContent, SidebarHeader } from '@/components/ui/sidebar'
@@ -40,6 +41,8 @@ const DEFAULT_BACKGROUNDS: BackgroundOption[] = [
   { id: '18', name: 'Flux Generic BG 10', path: '/backgrounds/18.jpg', type: 'image' },
   { id: '19', name: 'Flux Generic BG 11', path: '/backgrounds/19.jpg', type: 'image' },
   { id: '20', name: 'Flux Generic BG 12', path: '/backgrounds/20.jpg', type: 'image' },
+  { id: '21', name: 'Flux Generic BG 13', path: '/backgrounds/21.jpg', type: 'image' },
+  { id: '22', name: 'Flux Generic BG 14', path: '/backgrounds/22.jpg', type: 'image' },
   // { id: '14', name: 'Video BG 1—ALPHA', path: '/backgrounds/video1.mp4', type: 'video' }
 ]
 
